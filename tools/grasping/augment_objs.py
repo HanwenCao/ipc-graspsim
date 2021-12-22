@@ -48,9 +48,9 @@ def load_initial(outdir, ind):
     for obj in grasp:
         obj.fix_normals()
 
-    rounded_msh = tr.load('round_pad.obj')
+    rounded_msh = tr.load('dexgrasp_data/yumi_meshes/round_pad.obj')
     rounded_msh.vertices *= 80
-    head_msh = tr.load('base.stl')
+    head_msh = tr.load('dexgrasp_data/yumi_meshes/base.stl')
     head_msh.vertices *= 100
 
     backing_lst = [grasp[2], grasp[4]]
@@ -67,8 +67,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("outdir")
     args = parser.parse_args()
-
-    os.makedirs(os.path.join(args.outdir, 'objs'), exist_ok=True)
+    os.makedirs(os.path.join(args.outdir, 'objs/'), exist_ok=True)
     for obj in tqdm(glob.glob(os.path.join(args.outdir, 'test_*.obj'))):
         ind = int(os.path.basename(obj).split('.')[0].split('_')[1])
         grasp = load_initial(args.outdir, ind)
